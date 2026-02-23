@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlackhawkBraids – Product Catalog</title>
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>BlackhawkBraids</h1>
+    <span class="tagline">Services &amp; Products Catalog</span>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+
+      <!-- Filter Panel -->
+      <aside class="filter-panel" aria-label="Filter products">
+        <h2>Filters</h2>
+
+        <!-- Category Filter -->
+        <div class="filter-group">
+          <label for="category-select">Category</label>
+          <select id="category-select" aria-label="Filter by category">
+            <!-- Options populated by JS -->
+          </select>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div class="filter-group">
+          <label>Price Range</label>
+          <div class="price-values">
+            <span>$<strong id="min-price-display">0</strong></span>
+            <span>$<strong id="max-price-display">200</strong></span>
+          </div>
+          <input
+            type="range"
+            id="min-price-range"
+            min="0"
+            max="200"
+            value="0"
+            step="5"
+            aria-label="Minimum price"
+          />
+          <input
+            type="range"
+            id="max-price-range"
+            min="0"
+            max="200"
+            value="200"
+            step="5"
+            aria-label="Maximum price"
+          />
+          <div class="price-inputs">
+            <input
+              type="number"
+              id="min-price-input"
+              min="0"
+              max="200"
+              value="0"
+              placeholder="Min $"
+              aria-label="Minimum price input"
+            />
+            <input
+              type="number"
+              id="max-price-input"
+              min="0"
+              max="200"
+              value="200"
+              placeholder="Max $"
+              aria-label="Maximum price input"
+            />
+          </div>
+        </div>
+
+        <button class="btn-reset" id="reset-btn" type="button">Reset Filters</button>
+      </aside>
+
+      <!-- Results -->
+      <main class="results-area" aria-live="polite">
+        <div class="results-header">
+          <h2>Products</h2>
+          <span class="results-count" id="results-count"></span>
+        </div>
+        <div class="product-grid" id="product-grid">
+          <!-- Cards rendered by JS -->
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script src="src/products.js"></script>
+  <script src="src/productFilter.js"></script>
+  <script>
+    // ── State ──────────────────────────────────────────────────────────────
+    const { min: GLOBAL_MIN, max: GLOBAL_MAX } = getPriceRange(products);
+
+    let activeFilters = {
+      category: "all",
+      minPrice: GLOBAL_MIN,
+      maxPrice: GLOBAL_MAX,
+    };
+
+    // ── DOM References ─────────────────────────────────────────────────────
+    const categorySelect   = document.getElementById("category-select");
+    const minRangeInput    = document.getElementById("min-price-range");
+    const maxRangeInput    = document.getElementById("max-price-range");
+    const minNumberInput   = document.getElementById("min-price-input");
+    const maxNumberInput   = document.getElementById("max-price-input");
+    const minDisplay       = document.getElementById("min-price-display");
+    const maxDisplay       = document.getElementById("max-price-display");
+    const productGrid      = document.getElementById("product-grid");
+    const resultsCount     = document.getElementById("results-count");
+    const resetBtn         = document.getElementById("reset-btn");
+
+    // ── Initialise category select ─────────────────────────────────────────
+    categories.forEach(({ value, label }) => {
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = label;
+      categorySelect.appendChild(opt);
+    });
+
+    // ── Initialise price sliders from product data ─────────────────────────
+    [minRangeInput, maxRangeInput, minNumberInput, maxNumberInput].forEach((el) => {
+      el.min = GLOBAL_MIN;
+      el.max = GLOBAL_MAX;
+    });
+    minRangeInput.value   = GLOBAL_MIN;
+    maxRangeInput.value   = GLOBAL_MAX;
+    minNumberInput.value  = GLOBAL_MIN;
+    maxNumberInput.value  = GLOBAL_MAX;
+    activeFilters.minPrice = GLOBAL_MIN;
+    activeFilters.maxPrice = GLOBAL_MAX;
+
+    // ── Render ─────────────────────────────────────────────────────────────
+    function getCategoryLabel(value) {
+      const found = categories.find((c) => c.value === value);
+      return found ? found.label : value;
+    }
+
+    function renderProducts() {
+      const filtered = filterProducts(products, activeFilters);
+
+      resultsCount.textContent =
+        filtered.length === 1
+          ? "1 result"
+          : `${filtered.length} results`;
+
+      if (filtered.length === 0) {
+        productGrid.innerHTML = `
+          <div class="no-results">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <p>No products match your filters.</p>
+          </div>`;
+        return;
+      }
+
+      productGrid.innerHTML = filtered
+        .map(
+          ({ name, category, price, description }) => `
+          <article class="product-card">
+            <span class="category-badge">${escapeHtml(getCategoryLabel(category))}</span>
+            <h3>${escapeHtml(name)}</h3>
+            <p>${escapeHtml(description)}</p>
+            <span class="price">$${price}</span>
+          </article>`
+        )
+        .join("");
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // ── Sync price controls ────────────────────────────────────────────────
+    function syncPriceDisplays() {
+      minDisplay.textContent = activeFilters.minPrice;
+      maxDisplay.textContent = activeFilters.maxPrice;
+      minRangeInput.value    = activeFilters.minPrice;
+      maxRangeInput.value    = activeFilters.maxPrice;
+      minNumberInput.value   = activeFilters.minPrice;
+      maxNumberInput.value   = activeFilters.maxPrice;
+    }
+
+    function applyMinPrice(value) {
+      const val = Math.max(GLOBAL_MIN, Math.min(Number(value), activeFilters.maxPrice));
+      activeFilters.minPrice = val;
+      syncPriceDisplays();
+      renderProducts();
+    }
+
+    function applyMaxPrice(value) {
+      const val = Math.min(GLOBAL_MAX, Math.max(Number(value), activeFilters.minPrice));
+      activeFilters.maxPrice = val;
+      syncPriceDisplays();
+      renderProducts();
+    }
+
+    // ── Event Listeners ────────────────────────────────────────────────────
+    categorySelect.addEventListener("change", () => {
+      activeFilters.category = categorySelect.value;
+      renderProducts();
+    });
+
+    minRangeInput.addEventListener("input", () => applyMinPrice(minRangeInput.value));
+    maxRangeInput.addEventListener("input", () => applyMaxPrice(maxRangeInput.value));
+
+    minNumberInput.addEventListener("change", () => applyMinPrice(minNumberInput.value));
+    maxNumberInput.addEventListener("change", () => applyMaxPrice(maxNumberInput.value));
+
+    resetBtn.addEventListener("click", () => {
+      activeFilters = { category: "all", minPrice: GLOBAL_MIN, maxPrice: GLOBAL_MAX };
+      categorySelect.value = "all";
+      syncPriceDisplays();
+      renderProducts();
+    });
+
+    // ── Initial render ─────────────────────────────────────────────────────
+    renderProducts();
+  </script>
+</body>
+</html>
