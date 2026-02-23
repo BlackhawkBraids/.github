@@ -9,7 +9,7 @@ At Blackhawk Braids, we take security seriously. If you discover a security vuln
 **DO NOT** create a public GitHub issue for security vulnerabilities.
 
 Instead:
-1. Email: security@blackhawkbraids.com (update with actual security email)
+1. Email: security@blackhawkbraids.com
 2. Include:
    - Description of the vulnerability
    - Steps to reproduce

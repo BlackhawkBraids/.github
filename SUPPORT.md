@@ -62,7 +62,7 @@ For custom paracord builds:
 ## Contact Information
 
 For urgent issues or matters requiring immediate attention:
-- Email: support@blackhawkbraids.com (check your actual support email)
+- Email: support@blackhawkbraids.com
 - Include your order number in all communications
 
 ## Our Commitment
