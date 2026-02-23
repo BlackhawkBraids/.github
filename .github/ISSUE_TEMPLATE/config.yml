@@ -1,3 +1,5 @@
+# Issue template configuration for Blackhawk Braids customer support
+# Note: Verify URLs match actual website structure before deployment
 blank_issues_enabled: false
 contact_links:
   - name: 🌐 Visit Our Website
