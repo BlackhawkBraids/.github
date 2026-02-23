@@ -1,0 +1,16 @@
+{
+  "name": "blackhawk-braids",
+  "version": "1.0.0",
+  "description": "BlackhawkBraids – hair salon web application",
+  "main": "src/auth.js",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
