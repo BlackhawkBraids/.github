@@ -1,0 +1,20 @@
+# Label mapping for actions/labeler@v5
+# Format: label: [glob patterns]
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**'
+
+ci:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**'
+
+configuration:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/**'
+      - '!.github/workflows/**'
+      - '!**/*.md'
