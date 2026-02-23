@@ -1,7 +1,7 @@
 {
   "name": "blackhawkbraids-checkout",
   "version": "1.0.0",
-  "description": "BlackhawkBraids – secure Stripe checkout server with custom bracelet configuration",
+  "description": "BlackhawkBraids – secure Stripe checkout server with live bracelet pricing",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

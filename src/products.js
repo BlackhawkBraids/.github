@@ -7,7 +7,9 @@
  * Paracord bracelet products carry a `configOptions` object that defines the
  * valid choices a customer may select when customising their order.  The
  * server validates submitted configurations against these allowlists before
- * creating a Stripe Checkout Session.
+ * creating a Stripe Checkout Session.  Live pricing is calculated at checkout
+ * time by bracelet-pricing.js; the `price` field below is the minimum
+ * fallback (base) price only.
  */
 "use strict";
 
@@ -41,11 +43,11 @@ const products = [
   // Paracord Bracelets
   {
     id: 19,
-    name: "Tactical Cobra Weave Paracord Bracelet",
+    name: "Custom Paracord Bracelet",
     category: "paracord-bracelets",
-    price: 25,
+    price: 24.99,
     stock: 150,
-    description: "Handcrafted paracord bracelet — fully customisable colour, weave, length, material, and clasp.",
+    description: "Handcrafted paracord bracelet — fully customisable weave, colour, length, material, and clasp. Price adjusts live based on selected options.",
     configOptions: {
       color:    ["Black", "Neon Blue", "Black & Neon Blue", "Olive Drab", "Desert Tan"],
       style:    ["Tactical Cobra Weave", "King Cobra Weave", "Solomon Bar", "Fishtail"],

@@ -9,13 +9,15 @@
  *
  * Paracord bracelet items may carry an optional `config` field.  When
  * present, each configuration value is validated against the product's
- * `configOptions` allowlist before a Stripe session is created.
+ * `configOptions` allowlist, and the final price is calculated live by
+ * bracelet-pricing.js rather than using the catalog's static base price.
  */
 
 "use strict";
 
 const { products } = require("./products");
 const { validateBraceletConfig, formatBraceletConfig } = require("./bracelet-config");
+const { calculateBraceletPrice } = require("./bracelet-pricing");
 
 /** Countries to which shipping is permitted. */
 const ALLOWED_COUNTRIES = ["US"];
@@ -200,8 +202,8 @@ function deductStock(validatedItems) {
  * Prices are converted from dollars to cents as required by Stripe.
  *
  * For paracord-bracelet items the customer's validated configuration is
- * appended to the product description so it appears on the Stripe-hosted
- * checkout page and in order records.
+ * appended to the product description, and the live price is calculated
+ * by calculateBraceletPrice() rather than the static catalog price.
  *
  * @param {ValidatedItem[]} validatedItems
  * @returns {Array} Stripe line_items array
@@ -209,9 +211,13 @@ function deductStock(validatedItems) {
 function buildLineItems(validatedItems) {
   return validatedItems.map(({ product, quantity, config }) => {
     let description = product.description;
+    let price = product.price;
+
     if (config && product.category === "paracord-bracelets") {
       description = formatBraceletConfig(config);
+      price = calculateBraceletPrice(config).total;
     }
+
     return {
       price_data: {
         currency: "usd",
@@ -219,7 +225,7 @@ function buildLineItems(validatedItems) {
           name: product.name,
           description,
         },
-        unit_amount: Math.round(product.price * 100),
+        unit_amount: Math.round(price * 100),
       },
       quantity,
     };
