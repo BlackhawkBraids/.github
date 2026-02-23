@@ -1,6 +1,7 @@
 /**
  * Product catalog for BlackhawkBraids.
  * Each product represents a service or retail item offered.
+ * This is the authoritative source for server-side price validation.
  */
 const products = [
   // Braiding Services
