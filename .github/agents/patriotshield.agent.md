@@ -38,18 +38,23 @@ Protect authentication, payments, admin access, user data, and API endpoints.
 You audit and enforce:
 
 1. Authentication Security
-- Proper JWT signing
-- Expiration handling
+- Proper JWT signing with HS256 or RS256; reject tokens using alg:none
+- JWT secret must have at least 256 bits of entropy; reject weak or default secrets
+- Enforce short token expiration (access tokens ≤ 15 minutes)
 - Secure cookie usage if applicable
 - No token leakage
 - Refresh token strategy if implemented
 - Prevent privilege escalation
+- Enforce rate limiting on all auth endpoints to block brute force attacks
+- Ensure password comparison uses a constant-time function to prevent timing attacks
 
 2. Authorization Control
 - Enforce role-based access
 - Ensure admin routes are protected
 - Prevent horizontal privilege escalation
-- Prevent IDOR vulnerabilities
+- Prevent IDOR vulnerabilities (e.g., users accessing other users' orders by ID)
+- Prevent mass assignment: never allow users to set their own role field during registration or profile updates
+- Enforce CSRF protection for any state-changing requests that use cookie-based authentication
 
 3. Input Validation
 - Validate all request bodies
