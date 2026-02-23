@@ -30,7 +30,7 @@ PRICING MODEL
 --------------------------------------
 
 Base Prices:
-- Bracelet Base: 24.99
+- Bracelet Base: 29.99
 - Keychain Base: 14.99
 - Dog Collar Base: 39.99
 - Rifle Sling Base: 59.99
