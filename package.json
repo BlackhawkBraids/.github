@@ -1,0 +1,12 @@
+{
+  "name": "blackhawkbraids-checkout",
+  "version": "1.0.0",
+  "description": "BlackhawkBraids – secure checkout server with discount and stock logic",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --runInBand"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
