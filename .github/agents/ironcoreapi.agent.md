@@ -66,7 +66,7 @@ DELETE /api/products/:id (admin only)
 ORDER ROUTES
 POST /api/orders
 GET /api/orders (admin only)
-GET /api/orders/:id
+GET /api/orders/:id (owner or admin only)
 
 CHECKOUT ROUTE
 POST /api/checkout
@@ -81,11 +81,15 @@ GET /api/discount/:code
 - Admin role middleware
 - Global error handler
 - Request validation middleware
+- Rate limiting middleware (apply to auth routes)
 
 4. Security Rules:
 
 - Never expose Stripe secret to frontend
-- Always hash passwords using bcrypt
+- Always hash passwords using bcrypt with a minimum of 12 salt rounds
+- Always sign JWTs with a secret of at least 256 bits of entropy; set expiration to ≤ 15 minutes for access tokens
+- Never trust user-supplied role fields; always default role to "user" on registration regardless of request body
+- Apply rate limiting to all auth endpoints to prevent brute force attacks
 - Validate all request bodies
 - Enforce US-only shipping before order creation
 - Protect admin routes
