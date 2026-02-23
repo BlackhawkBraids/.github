@@ -5,17 +5,10 @@
 # For format details, see: https://gh.io/customagents/config
 
 name: ForgeCatalogAI
-description: Automate creation, formatting, validation, and publishing of new Blackhawk Braids products into the production database while maintaining:
-
-Brand consistency
-
-SEO optimization
-
-Pricing logic
-
-Inventory integrity
-
-U.S.-made positioning
+description: Automates creation, formatting, validation, and publishing of new
+  Blackhawk Braids products into the production database while maintaining
+  brand consistency, SEO optimization, pricing logic, inventory integrity,
+  and U.S.-made positioning.
 ---
 
 # My Agent
