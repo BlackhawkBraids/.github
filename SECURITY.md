@@ -1,31 +1,65 @@
 # Security Policy
 
-## Supported Versions
+## Reporting Security Vulnerabilities
 
-We actively maintain and patch security issues for the latest release of each project. Older versions may not receive security updates.
+At Blackhawk Braids, we take security seriously. If you discover a security vulnerability, please help us protect our customers by reporting it responsibly.
 
-| Version | Supported |
-|---------|-----------|
-| Latest  | ✅         |
-| Older   | ❌         |
+### How to Report
 
-## Reporting a Vulnerability
+**DO NOT** create a public GitHub issue for security vulnerabilities.
 
-**Please do not open a public GitHub issue for security vulnerabilities.**
+Instead:
+1. Email: security@blackhawkbraids.com
+2. Include:
+   - Description of the vulnerability
+   - Steps to reproduce
+   - Potential impact
+   - Any suggested fixes (optional)
 
-To report a vulnerability, e-mail **security@blackhawkbraids.com** with:
+### What to Expect
 
-1. A description of the vulnerability and its potential impact.
-2. Steps to reproduce or proof-of-concept code.
-3. Any suggested remediation if you have one.
+- **Acknowledgment:** Within 2 business days
+- **Updates:** We'll keep you informed as we investigate
+- **Resolution:** We'll work to fix verified vulnerabilities promptly
+- **Credit:** We're happy to acknowledge your responsible disclosure (if desired)
 
-We will acknowledge your report within **48 hours** and aim to provide a fix or mitigation within **90 days**, depending on complexity. We will credit reporters in the release notes unless you prefer to remain anonymous.
+### Scope
 
-## Disclosure Policy
+Security issues we're concerned about:
+- Payment processing vulnerabilities
+- Customer data exposure
+- Authentication/authorization bypasses
+- Cross-site scripting (XSS)
+- SQL injection
+- Other vulnerabilities that could compromise customer data or site integrity
 
-We follow a **coordinated disclosure** model:
+## Customer Data Protection
 
-1. Reporter submits details privately.
-2. We investigate and develop a fix.
-3. A fix is released.
-4. The vulnerability is publicly disclosed after affected users have had a reasonable opportunity to update.
+We protect customer information including:
+- Order details
+- Shipping addresses
+- Payment information (processed securely via third-party payment processors)
+- Email addresses
+
+**Our commitment:**
+- We never share customer data with unauthorized third parties
+- Payment data is processed through secure, PCI-compliant payment processors
+- We use encryption for sensitive data transmission
+- We follow industry best practices for data security
+
+## Secure Shopping
+
+When shopping at Blackhawk Braids:
+- ✅ Look for HTTPS in the URL
+- ✅ Verify the legitimate domain
+- ✅ Never share your password with anyone
+- ✅ Use strong, unique passwords
+- ✅ Review order confirmations carefully
+
+## Questions?
+
+For security-related questions (non-vulnerabilities), contact: support@blackhawkbraids.com
+
+---
+
+**Blackhawk Braids** - Premium 550 Paracord Gear, Made in America 🇺🇸

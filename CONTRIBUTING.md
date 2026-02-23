@@ -1,74 +1,76 @@
-# Contributing to BlackhawkBraids
+# Contributing to Blackhawk Braids
 
-Thank you for taking the time to contribute! The following guidelines help keep contributions consistent and reviews efficient across all BlackhawkBraids repositories.
+Thank you for your interest in Blackhawk Braids! 
 
-## Table of Contents
+## Customer Support Contributions
 
-1. [Code of Conduct](#code-of-conduct)
-2. [How to Report a Bug](#how-to-report-a-bug)
-3. [How to Request a Feature](#how-to-request-a-feature)
-4. [Submitting a Pull Request](#submitting-a-pull-request)
-5. [Commit Message Style](#commit-message-style)
-6. [Review Process](#review-process)
+This repository contains community health files for Blackhawk Braids customer support.
+
+### How You Can Help
+
+#### Reporting Issues
+
+If you're a customer experiencing an issue:
+- Use our [issue templates](.github/ISSUE_TEMPLATE/) to report problems
+- Provide detailed information to help us assist you
+- Be respectful and patient - we're here to help!
+
+#### Improving Documentation
+
+We welcome suggestions to improve:
+- Support documentation clarity
+- Issue template effectiveness
+- FAQ content
+- Process documentation
+
+To suggest improvements:
+1. Create an issue describing the improvement
+2. Explain why it would help customers
+3. Provide specific suggestions if possible
+
+### Guidelines
+
+#### Be Respectful
+
+- Treat everyone with respect
+- Follow our [Code of Conduct](CODE_OF_CONDUCT.md)
+- Use professional, courteous language
+- Avoid aggressive or demanding language
+
+#### Provide Detailed Information
+
+When reporting issues:
+- Include all requested information in templates
+- Add photos when relevant (especially for product defects)
+- Describe the situation clearly
+- Include order numbers when applicable
+
+#### Protect Privacy
+
+- Never share sensitive personal information publicly
+- Don't include full credit card numbers
+- Be cautious with personally identifiable information
+- Use email for sensitive matters
+
+### What We Don't Accept
+
+❌ Spam or promotional content  
+❌ Harassment or abusive behavior  
+❌ Off-topic discussions  
+❌ Requests to violate our policies (e.g., international shipping)  
+❌ Copyright infringement  
+
+### Response Times
+
+- **Product Defects:** 1-2 business days
+- **General Support:** 1-2 business days  
+- **Custom Orders:** 2-3 business days
+- **Documentation Suggestions:** As time permits
+
+### Questions?
+
+If you're unsure about anything, check our [Support Documentation](SUPPORT.md) or reach out to support@blackhawkbraids.com.
 
 ---
 
-## Code of Conduct
-
-All contributors are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md). Please read it before participating.
-
----
-
-## How to Report a Bug
-
-1. **Search existing issues** to avoid duplicates.
-2. Open a new issue using the **Bug Report** template.
-3. Include:
-   - Steps to reproduce the problem
-   - Expected vs. actual behavior
-   - Environment details (OS, version, browser, etc.)
-   - Logs or screenshots if relevant
-
----
-
-## How to Request a Feature
-
-1. **Search existing issues** to see if the idea has already been raised.
-2. Open a new issue using the **Feature Request** template.
-3. Describe the problem the feature would solve and, if possible, outline a proposed solution.
-
----
-
-## Submitting a Pull Request
-
-1. Fork the repository and create a branch from `main` (or the repository's default branch).
-2. Keep your branch focused on a single change; open separate PRs for unrelated changes.
-3. Make sure all existing tests pass before opening the PR.
-4. Fill in the pull request template completely.
-5. Link the PR to any related issue(s) using `Closes #<issue>` or `Relates to #<issue>` in the description.
-6. Request review from the relevant team or `CODEOWNERS` if defined.
-
----
-
-## Commit Message Style
-
-Use the [Conventional Commits](https://www.conventionalcommits.org/) format:
-
-```
-<type>(optional scope): <short summary>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-Common types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `ci`.
-
----
-
-## Review Process
-
-- A maintainer will review your PR within **5 business days**.
-- Automated checks (linting, tests, security scans) must pass before a human review begins.
-- Address all review comments; the reviewer will re-review and approve or request further changes.
-- Once approved by at least one maintainer, the PR will be merged using **squash merge** to keep the history clean.
+**Blackhawk Braids** - Premium 550 Paracord Gear, Made in America 🇺🇸

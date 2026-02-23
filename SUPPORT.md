@@ -1,70 +1,74 @@
-# Support
+# Customer Support
 
-## Need Help?
+Welcome to **Blackhawk Braids** customer support. We're here to help with your authentic 550 paracord gear.
 
-Thank you for choosing Blackhawk Braids! We're here to assist you with any questions or concerns.
+## 🇺🇸 About Blackhawk Braids
 
-## Quick Answers
+- **Authentic 550 Paracord** gear
+- **Crafted in the USA**
+- **U.S. Shipping Only**
+- **Premium tactical quality**
 
-Before reaching out, check if your question is answered in our **[FAQ](FAQ.md)**:
+## How to Get Help
 
-### Most Common Questions:
-- **[Is this real 550 paracord?](FAQ.md#is-this-real-550-paracord)** - Yes! All our products use authentic military-spec 550 paracord.
-- **[Shipping Information](FAQ.md#shipping--delivery)** - U.S. shipping only, 4-10 business days total.
-- **[Return Policy](FAQ.md#what-is-your-return-policy)** - 30-day returns on unused products.
-- **[Order Tracking](FAQ.md#how-can-i-track-my-order)** - Check your email for tracking information.
+### Product Quality Issues or Defects
 
-## Contact Support
+If your product broke, is defective, or has quality issues:
 
-If you can't find the answer in our FAQ, we're happy to help!
+1. **Create a Product Defect Report** using our issue template
+2. Include:
+   - Order number or confirmation email
+   - Photos of the defect/damage
+   - Description of what happened
+   - How long you've had the product
+3. Our support team will review within 1-2 business days
 
-### Email Support
-**support@blackhawkbraids.com**
+**Note:** Product defect claims require human review and cannot be automatically processed.
 
-**Response Time:** 24-48 hours during business days
+### General Questions
 
-### What to Include
+For general questions about:
+- **Products** - Materials, sizing, colors, styles
+- **Shipping** - U.S. shipping only, tracking, delivery times
+- **Orders** - Status, confirmation, modifications
+- **Returns** - Policy, process, exchanges
 
-For the fastest response, please provide:
-- **Order number** (if applicable)
-- **Detailed description** of your question or issue
-- **Photos** (if reporting a product issue)
-- **Contact information**
+Create a **General Support Request** using our issue template.
 
-## What We Can Help With
+### Custom Orders
 
-✅ Product questions (materials, sizing, durability)  
-✅ Order status and tracking  
-✅ Shipping information  
-✅ Returns and exchanges  
-✅ Product defects or quality issues  
-✅ Custom order inquiries  
-✅ General support  
+For custom paracord builds:
+- Check if a custom builder is available on our website
+- Create a **Custom Order Inquiry** using our issue template
+- Include your design requirements and specifications
 
-## Escalation Required
+## Response Times
 
-Some requests require direct support team assistance:
-- Refund processing
-- Defective product claims
-- Charge disputes
-- Policy exceptions
-- Order modifications (after shipping)
+- **Product Defects:** 1-2 business days
+- **General Support:** 1-2 business days
+- **Custom Orders:** 2-3 business days
 
-For these issues, please contact support@blackhawkbraids.com directly.
+## What We Don't Handle Here
 
-## Product Authenticity Guarantee
+❌ **Direct refund processing** - Must be handled by support team  
+❌ **Charge disputes** - Contact support team directly  
+❌ **Policy exceptions** - Require human review  
+❌ **Modifications to shipped orders** - Not possible once shipped
 
-**Every Blackhawk Braids product is made with authentic 550 paracord.**
+## U.S. Shipping Only
 
-We source genuine MIL-C-5040 Type III paracord from trusted U.S. suppliers. Our paracord features:
-- 7 inner strands (each with 3 yarns)
-- 550 lb minimum tensile strength
-- Military-spec nylon construction
-- Superior durability and quality
+⚠️ **Important:** Blackhawk Braids ships **only within the United States**. We cannot ship internationally or make exceptions to this policy.
 
-We stand behind our products 100%.
+## Contact Information
+
+For urgent issues or matters requiring immediate attention:
+- Email: support@blackhawkbraids.com
+- Include your order number in all communications
+
+## Our Commitment
+
+We stand behind our USA-made paracord gear. If there's a quality issue, we'll make it right.
 
 ---
 
-**Blackhawk Braids**  
-*Authentic 550 Paracord Gear • Crafted in the USA*
+**Blackhawk Braids** - Premium 550 Paracord Gear, Made in America 🇺🇸
