@@ -1,8 +1,7 @@
 /**
  * Checkout module for BlackhawkBraids.
  * Handles server-side cart validation, US-only shipping enforcement,
- * discount-code application, stock deduction, and Stripe line-item
- * construction.
+ * and Stripe line-item construction.
  *
  * All prices are sourced from the authoritative server-side product catalog —
  * client-submitted prices are never trusted.
@@ -16,20 +15,7 @@ const { products } = require("./products");
 const ALLOWED_COUNTRIES = ["US"];
 
 /**
- * Discount code registry.
- * Each entry maps a code (upper-case) to its discount rule:
- *   - type "percent"  → percentage off the subtotal (0–100)
- *   - type "flat"     → fixed dollar amount off the subtotal
- */
-const DISCOUNT_CODES = {
-  BRAID10:  { type: "percent", value: 10 },
-  BRAID20:  { type: "percent", value: 20 },
-  WELCOME5: { type: "flat",    value: 5  },
-  SAVE15:   { type: "flat",    value: 15 },
-};
-
-/**
- * @typedef {{ id: number, name: string, price: number, stock: number, description: string, category: string }} Product
+ * @typedef {{ id: number, name: string, price: number, description: string, category: string }} Product
  * @typedef {{ product: Product, quantity: number }} ValidatedItem
  */
 
@@ -57,10 +43,7 @@ function validateCart(cartItems) {
     }
 
     if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
-      return {
-        valid: false,
-        error: `Invalid quantity for product ${id}: must be between 1 and 99.`,
-      };
+      return { valid: false, error: `Invalid quantity for product ${id}: must be between 1 and 99.` };
     }
 
     const product = products.find((p) => p.id === id);
@@ -96,80 +79,6 @@ function validateUSShipping(country) {
 }
 
 /**
- * Applies a discount code to a subtotal.
- *
- * @param {string} code    - The discount code entered by the customer.
- * @param {number} subtotal - The order subtotal in dollars (before discount).
- * @returns {{
- *   valid: boolean,
- *   discountAmount?: number,
- *   total?: number,
- *   error?: string
- * }}
- */
-function applyDiscount(code, subtotal) {
-  if (!code || typeof code !== "string") {
-    return { valid: false, error: "Discount code is required." };
-  }
-
-  if (typeof subtotal !== "number" || subtotal < 0) {
-    return { valid: false, error: "Subtotal must be a non-negative number." };
-  }
-
-  const discount = DISCOUNT_CODES[code.trim().toUpperCase()];
-  if (!discount) {
-    return { valid: false, error: `Invalid discount code: ${code}` };
-  }
-
-  let discountAmount;
-  if (discount.type === "percent") {
-    discountAmount = parseFloat(((subtotal * discount.value) / 100).toFixed(2));
-  } else {
-    // flat discount — cannot exceed the subtotal
-    discountAmount = Math.min(discount.value, subtotal);
-  }
-
-  const total = parseFloat((subtotal - discountAmount).toFixed(2));
-  return { valid: true, discountAmount, total };
-}
-
-/**
- * Deducts ordered quantities from in-memory product stock.
- * Validates that sufficient stock exists for every item before making any
- * changes (all-or-nothing semantics).
- *
- * @param {ValidatedItem[]} validatedItems - Output of a successful validateCart call.
- * @returns {{ success: boolean, error?: string }}
- */
-function deductStock(validatedItems) {
-  if (!Array.isArray(validatedItems) || validatedItems.length === 0) {
-    return { success: false, error: "No items provided for stock deduction." };
-  }
-
-  // First pass: check availability for all items before mutating anything.
-  for (const { product, quantity } of validatedItems) {
-    const catalog = products.find((p) => p.id === product.id);
-    if (!catalog) {
-      return { success: false, error: `Product not found in catalog: ${product.id}` };
-    }
-    if (catalog.stock < quantity) {
-      return {
-        success: false,
-        error: `Insufficient stock for "${catalog.name}": ${catalog.stock} available, ${quantity} requested.`,
-      };
-    }
-  }
-
-  // Second pass: commit the deductions.
-  for (const { product, quantity } of validatedItems) {
-    const catalog = products.find((p) => p.id === product.id);
-    catalog.stock -= quantity;
-  }
-
-  return { success: true };
-}
-
-/**
  * Builds a Stripe `line_items` array from server-validated cart items.
  * Prices are converted from dollars to cents as required by Stripe.
  *
@@ -181,7 +90,7 @@ function buildLineItems(validatedItems) {
     price_data: {
       currency: "usd",
       product_data: {
-        name: product.name,
+        name:        product.name,
         description: product.description,
       },
       unit_amount: Math.round(product.price * 100),
@@ -190,12 +99,4 @@ function buildLineItems(validatedItems) {
   }));
 }
 
-module.exports = {
-  validateCart,
-  validateUSShipping,
-  applyDiscount,
-  deductStock,
-  buildLineItems,
-  ALLOWED_COUNTRIES,
-  DISCOUNT_CODES,
-};
+module.exports = { validateCart, validateUSShipping, buildLineItems, ALLOWED_COUNTRIES };

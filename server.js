@@ -2,23 +2,76 @@
 
 require("dotenv").config();
 
-const path = require("path");
+const path    = require("path");
 const express = require("express");
-const cors = require("cors");
-const Stripe = require("stripe");
+const cors    = require("cors");
+const Stripe  = require("stripe");
 
-const { validateCart, validateUSShipping, buildLineItems } = require("./src/checkout");
+const { validateCart, buildLineItems } = require("./src/checkout");
 
 const app = express();
 
+// ── Stripe webhook ──────────────────────────────────────────────────────────
+// Must be registered BEFORE express.json() so Stripe receives the raw body
+// required for signature verification.
+app.post(
+  "/api/webhook",
+  express.raw({ type: "application/json" }),
+  (req, res) => {
+    const sig           = req.headers["stripe-signature"];
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+    if (!webhookSecret) {
+      console.error("STRIPE_WEBHOOK_SECRET is not set.");
+      return res.status(500).json({ error: "Webhook secret not configured." });
+    }
+
+    let event;
+    try {
+      const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+      event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+    } catch (err) {
+      console.error("Webhook signature verification failed:", err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the events that matter for order fulfillment.
+    switch (event.type) {
+      case "checkout.session.completed": {
+        const session = event.data.object;
+        console.log(
+          `Payment succeeded for session ${session.id} — ` +
+          `amount: ${session.amount_total} ${session.currency}`
+        );
+        // TODO: persist order, send confirmation email, update inventory, etc.
+        break;
+      }
+      case "payment_intent.payment_failed": {
+        const intent = event.data.object;
+        console.warn(`Payment failed for PaymentIntent ${intent.id}`);
+        break;
+      }
+      default:
+        // Unhandled event type — safe to ignore.
+        break;
+    }
+
+    res.json({ received: true });
+  }
+);
+
+// ── Standard middleware ─────────────────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
+
 // Serve only the dedicated public folder — never the server's working directory.
 app.use(express.static(path.join(__dirname, "public")));
 
+// ── GET /api/health ─────────────────────────────────────────────────────────
+app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
+
+// ── POST /api/checkout/session ──────────────────────────────────────────────
 /**
- * POST /api/checkout/session
- *
  * Expects JSON body: { cartItems: [{ id, quantity }, ...] }
  *
  * Security measures:
@@ -43,7 +96,7 @@ app.post("/api/checkout/session", async (req, res) => {
     // 2. Build Stripe line items using server-validated prices (cents).
     const lineItems = buildLineItems(cartResult.items);
 
-    const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+    const stripe  = Stripe(process.env.STRIPE_SECRET_KEY);
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
     // 3. Create the Stripe Checkout Session.
@@ -52,13 +105,13 @@ app.post("/api/checkout/session", async (req, res) => {
     //    shipping before any charge is captured.
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: lineItems,
-      mode: "payment",
+      line_items:           lineItems,
+      mode:                 "payment",
       shipping_address_collection: {
         allowed_countries: ["US"],
       },
       success_url: `${baseUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/checkout.html`,
+      cancel_url:  `${baseUrl}/checkout.html`,
     });
 
     res.json({ url: session.url });
@@ -68,6 +121,7 @@ app.post("/api/checkout/session", async (req, res) => {
   }
 });
 
+// ── Start ───────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 if (require.main === module) {
   app.listen(PORT, () =>
