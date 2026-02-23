@@ -1,0 +1,77 @@
+name: 💬 General Support Request
+description: Get help with orders, shipping, products, or general questions
+title: "[SUPPORT] "
+labels: ["support", "question"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## General Support Request
+        
+        We're here to help! Use this form for questions about:
+        - 📦 Order status or tracking
+        - 🚚 Shipping questions (U.S. only)
+        - 🎨 Product details, colors, sizing
+        - 🔄 Returns and exchanges
+        - 🛍️ Product recommendations
+        
+  - type: dropdown
+    id: support-category
+    attributes:
+      label: What do you need help with?
+      description: Select the category that best matches your question
+      options:
+        - Order Status/Tracking
+        - Shipping Question
+        - Product Information
+        - Returns/Exchanges
+        - Product Recommendations
+        - Account/Website Issue
+        - Other
+    validations:
+      required: true
+      
+  - type: input
+    id: order-number
+    attributes:
+      label: Order Number (if applicable)
+      description: Include your order number if this relates to a specific order
+      placeholder: "e.g., BHB-12345"
+    validations:
+      required: false
+      
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Please describe what you need help with
+      placeholder: "Example: When will my order ship? I placed it 3 days ago and haven't received tracking yet."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Information
+      description: Any other details that might help us assist you
+      placeholder: "Any additional context..."
+    validations:
+      required: false
+      
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ### Response Time
+        We aim to respond to general support requests within **1-2 business days**.
+        
+        ### Quick Answers
+        
+        **Shipping Policy:** Blackhawk Braids ships **U.S. only** 🇺🇸  
+        **Materials:** Authentic 550 paracord, Made in USA  
+        **Order Changes:** Contact us ASAP if your order hasn't shipped yet  
+        
+        ---
+        **Blackhawk Braids** - Premium 550 Paracord Gear, Made in America 🇺🇸

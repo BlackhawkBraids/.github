@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🌐 Visit Our Website
+    url: https://blackhawkbraids.com
+    about: Browse our full catalog of authentic 550 paracord gear
+  - name: 📧 Email Support
+    url: mailto:support@blackhawkbraids.com
+    about: Contact our support team directly for urgent matters
+  - name: 🛒 Track Your Order
+    url: https://blackhawkbraids.com/track
+    about: Check the status of your order (update URL with actual tracking page)
