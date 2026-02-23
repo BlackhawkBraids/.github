@@ -64,7 +64,7 @@
     .cart-item {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--color-border);
       gap: 1rem;
@@ -75,9 +75,18 @@
     .item-info { flex: 1; }
     .item-name { font-weight: 600; font-size: 0.975rem; }
     .item-desc { font-size: 0.8rem; color: var(--color-muted); margin-top: 0.2rem; }
+    .item-config {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      margin-top: 0.35rem;
+      background: #f6f0f5;
+      border-radius: 4px;
+      padding: 0.35rem 0.5rem;
+      display: inline-block;
+    }
 
     .item-qty-price { text-align: right; white-space: nowrap; }
-    .item-qty-price .qty  { font-size: 0.8rem; color: var(--color-muted); }
+    .item-qty-price .qty   { font-size: 0.8rem; color: var(--color-muted); }
     .item-qty-price .price { font-weight: 700; color: var(--color-accent); font-size: 1rem; }
 
     .cart-total {
@@ -193,11 +202,21 @@
 
   <script>
     /**
-     * Simple in-memory demo cart.
+     * Demo cart that includes a configured paracord bracelet.
      * In production this would be persisted in localStorage / a cart API.
      */
     const demoCart = [
-      { id: 2, quantity: 1 },
+      {
+        id: 19,
+        quantity: 1,
+        config: {
+          color:    "Black & Neon Blue",
+          style:    "Tactical Cobra Weave",
+          length:   "7in",
+          material: "550 Paracord",
+          clasp:    "Sliding Knot",
+        },
+      },
       { id: 14, quantity: 2 },
     ];
 
@@ -221,7 +240,22 @@
       { id: 16, name: "Deep Conditioner (8 oz)",     price: 22,  description: "Professional-grade deep conditioner." },
       { id: 17, name: "Hair Oil Blend",              price: 18,  description: "Nourishing oil blend for scalp health." },
       { id: 18, name: "Braiding Gel",                price: 10,  description: "Smooth braiding gel for all hair types." },
+      { id: 19, name: "Tactical Cobra Weave Paracord Bracelet", price: 25, description: "Handcrafted paracord bracelet." },
     ];
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function formatConfig(config) {
+      return Object.entries(config)
+        .map(([k, v]) => `${k.charAt(0).toUpperCase() + k.slice(1)}: ${v}`)
+        .join(" · ");
+    }
 
     // ── Render cart ─────────────────────────────────────────────────────────
     function renderCart(cartItems) {
@@ -231,22 +265,26 @@
       if (!cartItems || cartItems.length === 0) {
         wrapper.innerHTML = `
           <div class="empty-cart">
-            <p>Your cart is empty. <a href="index.html">Browse products</a></p>
+            <p>Your cart is empty. <a href="configure-bracelet.html">Configure a bracelet</a></p>
           </div>`;
         return;
       }
 
       let total = 0;
-      const itemsHtml = cartItems.map(({ id, quantity }) => {
+      const itemsHtml = cartItems.map(({ id, quantity, config }) => {
         const product = PRODUCTS.find((p) => p.id === id);
         if (!product) return "";
         const lineTotal = product.price * quantity;
         total += lineTotal;
+        const configHtml = config
+          ? `<div class="item-config">${escapeHtml(formatConfig(config))}</div>`
+          : "";
         return `
           <div class="cart-item">
             <div class="item-info">
               <div class="item-name">${escapeHtml(product.name)}</div>
               <div class="item-desc">${escapeHtml(product.description)}</div>
+              ${configHtml}
             </div>
             <div class="item-qty-price">
               <div class="qty">Qty: ${quantity}</div>
@@ -267,14 +305,6 @@
       btn.disabled = false;
     }
 
-    function escapeHtml(str) {
-      return str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
     // ── Checkout ────────────────────────────────────────────────────────────
     document.getElementById("checkout-btn").addEventListener("click", async () => {
       const btn     = document.getElementById("checkout-btn");
@@ -282,7 +312,7 @@
       const label   = document.getElementById("btn-label");
       const errDiv  = document.getElementById("error-msg");
 
-      btn.disabled    = true;
+      btn.disabled          = true;
       spinner.style.display = "block";
       label.textContent     = "Redirecting…";
       errDiv.style.display  = "none";
@@ -302,9 +332,9 @@
 
         window.location.href = data.url;
       } catch (err) {
-        errDiv.textContent   = err.message;
-        errDiv.style.display = "block";
-        btn.disabled         = false;
+        errDiv.textContent    = err.message;
+        errDiv.style.display  = "block";
+        btn.disabled          = false;
         spinner.style.display = "none";
         label.textContent     = "Proceed to Secure Checkout";
       }

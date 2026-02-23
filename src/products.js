@@ -3,6 +3,11 @@
  * Each product is the authoritative source for server-side price and stock
  * validation. Stock values represent available units; services use a high
  * sentinel (999) to indicate effectively unlimited availability.
+ *
+ * Paracord bracelet products carry a `configOptions` object that defines the
+ * valid choices a customer may select when customising their order.  The
+ * server validates submitted configurations against these allowlists before
+ * creating a Stripe Checkout Session.
  */
 "use strict";
 
@@ -34,7 +39,21 @@ const products = [
   { id: 18, name: "Braiding Gel",                category: "hair-products",      price: 10,  stock: 60,  description: "Smooth braiding gel for all hair types." },
 
   // Paracord Bracelets
-  { id: 19, name: "Tactical Cobra Weave Paracord Bracelet", category: "paracord-bracelets", price: 25, cost: 8, stock: 150, colors: ["Black", "Neon Blue"], style: "Tactical Cobra Weave", premiumDrop: true, description: "Handcrafted tactical cobra weave paracord bracelet in Black & Neon Blue. A premium drop item." },
+  {
+    id: 19,
+    name: "Tactical Cobra Weave Paracord Bracelet",
+    category: "paracord-bracelets",
+    price: 25,
+    stock: 150,
+    description: "Handcrafted paracord bracelet — fully customisable colour, weave, length, material, and clasp.",
+    configOptions: {
+      color:    ["Black", "Neon Blue", "Black & Neon Blue", "Olive Drab", "Desert Tan"],
+      style:    ["Tactical Cobra Weave", "King Cobra Weave", "Solomon Bar", "Fishtail"],
+      length:   ["6in", "7in", "8in", "9in"],
+      material: ["550 Paracord", "Type III Paracord", "Micro Cord"],
+      clasp:    ["Sliding Knot", "Buckle Clasp", "Shackle Clasp"],
+    },
+  },
 ];
 
 const categories = [
