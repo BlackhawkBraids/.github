@@ -1,0 +1,110 @@
+name: 🎨 Custom Order Inquiry
+description: Request a custom paracord build or personalization
+title: "[CUSTOM] "
+labels: ["custom-order", "inquiry"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Custom Order Inquiry
+        
+        Interested in a custom paracord build? Let us know what you're looking for!
+        
+        **Response time:** 2-3 business days
+        
+  - type: dropdown
+    id: product-type
+    attributes:
+      label: What would you like customized?
+      description: Select the type of product
+      options:
+        - Bracelet
+        - Keychain
+        - Lanyard
+        - Belt
+        - Dog Collar
+        - Dog Leash
+        - Other/Not Sure
+    validations:
+      required: true
+      
+  - type: textarea
+    id: custom-details
+    attributes:
+      label: Custom Design Details
+      description: Describe what you want customized (colors, size, style, patterns, etc.)
+      placeholder: |
+        Example:
+        - Two-color bracelet in black and red
+        - King cobra weave pattern
+        - 8-inch wrist size
+        - Black hardware/buckle
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: quantity
+    attributes:
+      label: Quantity Needed
+      description: How many items do you need?
+      options:
+        - "1"
+        - "2-5"
+        - "6-10"
+        - "11-25"
+        - "25+"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: timeline
+    attributes:
+      label: When do you need this?
+      description: What's your timeline?
+      options:
+        - No rush
+        - Within 2 weeks
+        - Within 1 week
+        - ASAP
+        - Specific date (will specify below)
+    validations:
+      required: false
+      
+  - type: textarea
+    id: reference-images
+    attributes:
+      label: Reference Images (Optional)
+      description: |
+        Upload any reference images showing what you want
+        Drag and drop images here or click to upload.
+    validations:
+      required: false
+      
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: Additional Notes
+      description: Anything else we should know?
+    validations:
+      required: false
+      
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ### What happens next?
+        
+        1. ✅ Your inquiry is submitted
+        2. 👀 Our team reviews your custom request
+        3. 📧 We'll respond within 2-3 business days with:
+           - Feasibility confirmation
+           - Pricing estimate
+           - Timeline estimate
+           - Next steps for ordering
+        
+        **Note:** All custom orders ship U.S. only 🇺🇸
+        
+        ---
+        **Blackhawk Braids** - Premium 550 Paracord Gear, Made in America 🇺🇸
