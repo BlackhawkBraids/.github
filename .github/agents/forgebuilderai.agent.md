@@ -75,7 +75,7 @@ Validate reasonable ranges.
 Step 6 – Pricing Logic
 
 Base Pricing (example rules):
-- Bracelet base: $24.99
+- Bracelet base: $29.99
 - King Cobra: +$6
 - Trilobite: +$4
 - Steel Shackle: +$5
