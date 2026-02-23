@@ -1,12 +1,27 @@
 # BlackhawkBraids — Community Health Files
 
-This repository contains the public profile and community health files for the [BlackhawkBraids](https://github.com/BlackhawkBraids) organization.
+This repository contains organization-wide community health files and default configurations for all repositories under the [BlackhawkBraids](https://github.com/BlackhawkBraids) organization.
 
-## Contents
+## What's in here
 
-- [`profile/README.md`](./profile/README.md) — Organization profile page (shown on the BlackhawkBraids GitHub homepage)
-- [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md) — Community standards and enforcement guidelines
+| File / Folder | Purpose |
+|---|---|
+| `CODE_OF_CONDUCT.md` | Community standards and enforcement policy |
+| `CONTRIBUTING.md` | Contributor guide — how to open issues and submit pull requests |
+| `SECURITY.md` | How to responsibly report security vulnerabilities |
+| `.github/ISSUE_TEMPLATE/` | Standardized templates for bug reports and feature requests |
+| `.github/pull_request_template.md` | Checklist that every pull request follows |
+| `.github/workflows/stale.yml` | Automatically marks and closes inactive issues and PRs |
+| `.github/workflows/labeler.yml` | Automatically applies labels based on changed file paths |
 
-## About BlackhawkBraids
+## How defaults work
 
-BlackhawkBraids is a professional hair braiding service offering a wide range of protective and custom braid styles. For bookings and inquiries, contact us at [support@blackhawkbraids.com](mailto:support@blackhawkbraids.com).
+GitHub applies these files to every repository in the organization that does **not** define its own version of the file. See [GitHub Docs — Default community health files](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file) for details.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
